@@ -1,10 +1,15 @@
 import re
 import os
  
+current = 1
+
 for i in os.listdir(os.getcwd()):
- 
+        
+
         if (not i.endswith('.py')):
- 
+                
+                print current
+
                 f = open(i, 'r')
                 texto = f.read()
  
@@ -20,12 +25,17 @@ for i in os.listdir(os.getcwd()):
                         result = re.search('<a name="(.*)<hr>', texto)
                         if (result != None):
                                 texto = texto.replace('<a name="' + result.group(1) + '<hr>', '')
- 
-                texto = texto.replace('<link rel="stylesheet" type="text/css" href="/drae/css/I.drae.css+estilosCabDrae.css,Mcc.W_CzH9ApGk.css.pagespeed.cf.w1GLVsE-IR.css">',
+                
+                result = re.search('<link rel="stylesheet" type="text/css" href="(.*)">', texto)
+                if (result != None):
+                        texto = texto.replace('<link rel="stylesheet" type="text/css" href="' + result.group(1) + '">', 
                         '<link rel="stylesheet" type="text/css" href="estilo.css"> <meta charset="UTF-8">')
+
  
                 texto = texto.replace('<a href', '<a id')
  
  
                 f = open(i, 'w')
                 f.write(texto)
+
+                current += 1
