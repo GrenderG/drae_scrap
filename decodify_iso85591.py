@@ -31,6 +31,8 @@ def decodify(old_name):
     old_name = old_name.replace('%FC', 'ü')
     old_name = old_name.replace('%AD', '-')
     old_name = old_name.replace('%A1', '¡')
+    old_name = old_name.replace('%20', '_')
+    old_name = old_name.replace('%EE', 'î')
 
     return old_name
     
